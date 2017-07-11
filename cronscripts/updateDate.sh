@@ -147,6 +147,7 @@ else
 	newDay=`cal $newMth $newYr| tail +5|cut -c19,20| sed -n 1p`
 	newMthStr=$(MonthStr ${newMth})
 	newDate="$newMthStr $(LastDigit ${newDay}), $newYr"
+	saveDate="$newYr$newMth$newDay"
 
 	# change all the dates
 	$PWD/updatePages.sh $WEBSITE "${oldDate}" "${newDate}"
@@ -157,5 +158,14 @@ else
 	git commit -m 'updated with new meeting date'
 	git push origin
 
+	# update the email reminder
+	$PWD/updateMonthlyEmails.sh email-content.txt "${oldDate}" "${newDate}"
+
+	# write new date to file 
+	rm -f $PWD/nextDate.txt
+	touch $PWD/nextDate.txt
+	echo "saveDate="\"${saveDate}\""" > $PWD/nextDate.txt
+	
+	
 echo "New Date: $newDate Old Date: $oldDate"
 fi
