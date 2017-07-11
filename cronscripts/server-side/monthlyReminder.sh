@@ -13,4 +13,5 @@ else
 	nextSat=$(date -d "+3 days" +"%Y%m%d")
 	if [[ $nextSat == $saveDate ]]; then
 		python /path/to/automate/sendemail.py
+	fi
 fi
