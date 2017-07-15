@@ -1,1 +1,1 @@
-saveDate="YYYYMMDD"
+YYYYMMDD

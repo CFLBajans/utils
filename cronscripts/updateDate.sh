@@ -164,7 +164,7 @@ else
 	# write new date to file 
 	rm -f $PWD/nextDate.txt
 	touch $PWD/nextDate.txt
-	echo "saveDate="\"${saveDate}\""" > $PWD/nextDate.txt
+	echo $saveDate > $PWD/nextDate.txt
 	
 	
 echo "New Date: $newDate Old Date: $oldDate"
