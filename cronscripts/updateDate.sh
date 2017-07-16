@@ -129,7 +129,7 @@ else
     MonthCheck $2
     NY=$1
     NM=$2
-    oldDay=`cal $2 $1| tail +5|cut -c19,20| sed -n 1p`
+    oldDay=`cal $2 $1| tail -4|cut -c19,20| sed -n 1p`
     oldMthStr=$(MonthStr ${NM})
     oldDate="$oldMthStr $(LastDigit ${oldDay}), $NY"
     oldDay=$((oldDay-1))
@@ -144,7 +144,7 @@ else
 		newMth="1"
 	fi
 
-	newDay=`cal $newMth $newYr| tail +5|cut -c19,20| sed -n 1p`
+	newDay=`cal $newMth $newYr| tail -4|cut -c19,20| sed -n 1p`
 	newMthStr=$(MonthStr ${newMth})
 	newDate="$newMthStr $(LastDigit ${newDay}), $newYr"
 	saveDate="$newYr$newMth$newDay"
@@ -159,11 +159,9 @@ else
 	git push origin
 
 	# update the email reminder
-	$PWD/updateMonthlyEmails.sh email-content.txt "${oldDate}" "${newDate}"
+	$PWD/updateMonthlyEmail.sh email-content.txt "${oldDate}" "${newDate}"
 
 	# write new date to file 
-	rm -f $PWD/nextDate.txt
-	touch $PWD/nextDate.txt
 	echo $saveDate > $PWD/nextDate.txt
 	
 	
