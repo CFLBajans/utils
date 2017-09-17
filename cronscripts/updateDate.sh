@@ -135,7 +135,7 @@ else
     oldDay=$((oldDay-1))
 
     # get new date
-    newMth=$((NM+1))
+    newMth=$((10#$NM+1))
 	newYr=$1
 
 
